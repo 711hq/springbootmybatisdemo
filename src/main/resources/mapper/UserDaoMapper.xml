@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="com.etc.dao.ArticleDao2">
+    <select id="find" resultType="User">
+        select * from user
+    </select>
+    <select id="findByCondition" resultType="User">
+        select * from user where 1=1
+        <if test="uid != null and uid !=''">
+            and uid = #{uid}
+        </if>
+        <if test="uname != null and uname != ''">
+            and uname = #{uname}
+        </if>
+
+    </select>
+    <select id="selectLogin" parameterType="User" resultType="User">
+        select * from user where uname=#{uname} and pwd=#{pwd}
+    </select>
+    <select id="selectByUid" parameterType="java.lang.Integer" resultType="User">
+        select * from user where uid = #{uid}
+
+    </select>
+    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="uid">
+        insert into user values(null,#{uname},#{pwd})
+   </insert>
+    <update id="update" parameterType="User">
+        update user set uname=#{uname},pwd=#{pwd} where uid=#{uid}
+   </update>
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from user where uid=#{uid}
+    </delete>
+
+
+
+
+</mapper>
